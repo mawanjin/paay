@@ -310,8 +310,8 @@ public class PayCenter {
                 params.put("token",token);
                 params.put("role",role);
                 params.put("room_id",roomId);
-//                String rs = NetUtils.getRequest("http://anv3btapi.papa91.com/netbattle/start_lobby_game", params);
-                String rs = NetUtils.getRequest("http://192.168.78.5:10001/netbattle/start_lobby_game", params);
+                String rs = NetUtils.getRequest("http://anv3btapi.papa91.com/netbattle/start_lobby_game", params);
+//                String rs = NetUtils.getRequest("http://192.168.78.5:10001/netbattle/start_lobby_game", params);
                 if(rs==null){
                     PayResponse response = new PayResponse();
                     PayResponseData data = new PayResponseData();

@@ -16,10 +16,7 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.params.*;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
@@ -83,6 +80,8 @@ public class NetUtils {
             }
             // 创建HttpClient对象
             HttpClient client = getNewHttpClient();
+            client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 5000);
+            client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 5000);
             // 发送get请求创建HttpGet对象
             HttpGet getMethod = new HttpGet(urlBuilder.toString());
             HttpResponse response = client.execute(getMethod);
