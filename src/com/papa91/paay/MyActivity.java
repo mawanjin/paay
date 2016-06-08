@@ -10,8 +10,8 @@ import android.util.Log;
 public class MyActivity extends Activity {
 
     PaayReceiver paayReceiver;
-    String uid = "121";
-    String token = "121";
+    String uid = "3913852899";
+    String token = "5wnrKqSDPBCvHcWp";
     /**
      * Called when the activity is first created.
      */
@@ -26,7 +26,8 @@ public class MyActivity extends Activity {
                 uid = intent.getExtras().getString("uid");
                 token = intent.getExtras().getString("token");
                 Log.d("TTTTTTTTTTTT","uid="+uid+";token="+token);
-                startLobbyGame();
+                lobbyPlayCheck();
+//                startLobbyGame();
 //                inquiry();
             }
         };
@@ -50,7 +51,7 @@ public class MyActivity extends Activity {
 
 
     public void startLobbyGame(){
-        PayCenter.startLobby(this, uid, token, "123", "master", "1", new PayListener() {
+        PayCenter.startLobby(this, uid, token, "3913852899", "client", "20040032", new PayListener() {
             @Override
             public void onResult(PayResponse payResponse) {
                 if (payResponse != null) {
@@ -59,6 +60,18 @@ public class MyActivity extends Activity {
             }
         });
     }
+
+    public void lobbyPlayCheck(){
+        PayCenter.lobbyPlayCheck(this, uid, token, "3913852899", "client", "20040032", new PayListener() {
+            @Override
+            public void onResult(PayResponse payResponse) {
+                if (payResponse != null) {
+                    Log.d("TTTTTTTTTTTT","payResponse="+payResponse.getError());
+                }
+            }
+        });
+    }
+
 
     @Override
     protected void onDestroy() {

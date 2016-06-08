@@ -12,6 +12,10 @@ public class PayResponseData {
     private String error_message;
     private String status;
     private String error;
+    private int money;
+    private int create_money;
+    private int join_money;
+
 
     public boolean isIs_buy() {
         return is_buy;
@@ -71,5 +75,29 @@ public class PayResponseData {
 
     public void setError(String error) {
         this.error = error;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public int getCreate_money() {
+        return create_money;
+    }
+
+    public void setCreate_money(int create_money) {
+        this.create_money = create_money;
+    }
+
+    public int getJoin_money() {
+        return join_money;
+    }
+
+    public void setJoin_money(int join_money) {
+        this.join_money = join_money;
     }
 }

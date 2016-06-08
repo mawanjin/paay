@@ -326,6 +326,44 @@ public class PayCenter {
                 }
             }
         }.start();
-    };
+    }
+
+
+    public static void lobbyPlayCheck(Context context, final String uid, final String token, final String gameId, final String role,final String roomId,final PayListener listener){
+        mContext = context;
+        payListener  = listener;
+        if(uid==null||uid.equals("")||uid.equals("0")){
+            redirectLogin();
+            return;
+        }
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                Map params = new HashMap(0);
+                params.put("uid",uid);
+                params.put("game_id",gameId);
+                params.put("token",token);
+                params.put("role",role);
+                params.put("room_id",roomId);
+                String rs = NetUtils.getRequest("http://anv3btapi.papa91.com/netbattle/lobby_play_check", params);
+//                String rs = NetUtils.getRequest("http://192.168.78.5:10001/netbattle/start_lobby_game", params);
+                if(rs==null){
+                    PayResponse response = new PayResponse();
+                    PayResponseData data = new PayResponseData();
+                    data.setBuy_error_message("网络异常");
+                    response.setData(data);
+                    response.setError(-1);
+                    payResponse = response;
+                    mHandler.sendEmptyMessage(1);
+                }else{
+                    payResponse = mGson.fromJson(rs, PayResponse.class);
+                    mHandler.sendEmptyMessage(0);
+                }
+            }
+        }.start();
+    }
+
+
 
 }
