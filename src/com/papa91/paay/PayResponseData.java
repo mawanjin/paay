@@ -12,6 +12,7 @@ public class PayResponseData {
     private String error_message;
     private String status;
     private String error;
+    private String join_message;
     private int money;
     private int create_money;
     private int join_money;
@@ -99,5 +100,13 @@ public class PayResponseData {
 
     public void setJoin_money(int join_money) {
         this.join_money = join_money;
+    }
+
+    public String getJoin_message() {
+        return join_message;
+    }
+
+    public void setJoin_message(String join_message) {
+        this.join_message = join_message;
     }
 }
