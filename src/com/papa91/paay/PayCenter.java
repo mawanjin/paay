@@ -18,7 +18,9 @@ import java.util.Map;
  * Created by lala on 15/11/13.
  */
 public class PayCenter {
+
     private final static String root = "http://payv1.papa91.com";
+    private static String pabiRoot = "http://anv3btapi.papa91.com";
     public final static String ACTION_LOGIN_SUCCESS = "com.join.android.app.mgsim.broadcast.action_login_success";
     public final static String ACTION_UPDATE_USER_PURCHASE_INFO = "com.join.android.app.mgsim.broadcast.action_update_user_purchase_info";
     private static final String TAG = "PayCenter";
@@ -26,6 +28,7 @@ public class PayCenter {
     private static Gson mGson = new Gson();
     private static PayResponse payResponse;
     private static Context mContext;
+    private static boolean isDebug=false;
 
     private static Handler mHandler = new Handler(){
         @Override
@@ -310,7 +313,10 @@ public class PayCenter {
                 params.put("token",token);
                 params.put("role",role);
                 params.put("room_id",roomId);
-                String rs = NetUtils.getRequest("http://anv3btapi.papa91.com/netbattle/start_lobby_game", params);
+                if(isDebug){
+                    pabiRoot = "http://192.168.78.5:10001";
+                }
+                String rs = NetUtils.getRequest(pabiRoot+"/netbattle/start_lobby_game", params);
 //                String rs = NetUtils.getRequest("http://192.168.78.5:10001/netbattle/start_lobby_game", params);
                 if(rs==null){
                     PayResponse response = new PayResponse();
@@ -346,8 +352,11 @@ public class PayCenter {
                 params.put("token",token);
                 params.put("role",role);
                 params.put("room_id",roomId);
-                String rs = NetUtils.getRequest("http://anv3btapi.papa91.com/netbattle/lobby_play_check", params);
-//                String rs = NetUtils.getRequest("http://192.168.78.5:10001/netbattle/start_lobby_game", params);
+                if(isDebug){
+                    pabiRoot = "http://192.168.78.5:10001";
+                }
+                String rs = NetUtils.getRequest(pabiRoot+"/netbattle/lobby_play_check", params);
+//                String rs = NetUtils.getRequest("http://192.168.78.5:10001/netbattle/lobby_play_check", params);
                 if(rs==null){
                     PayResponse response = new PayResponse();
                     PayResponseData data = new PayResponseData();
@@ -364,6 +373,7 @@ public class PayCenter {
         }.start();
     }
 
-
-
+    public static void setDebug(boolean debug) {
+        isDebug = debug;
+    }
 }

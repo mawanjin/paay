@@ -38,6 +38,7 @@ public class MyActivity extends Activity {
     }
 
     public void inquiry(){
+
         PayCenter.inquiryCheat(this, uid, token, "123", new PayListener() {
 
             @Override
